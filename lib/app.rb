@@ -2,6 +2,7 @@
 
 require_relative '../config/load_initializers'
 
+# class principal de inicio no app, onde chamara a principais funções de inicio
 class App
   attr_accessor :keep_going
 
@@ -19,7 +20,7 @@ class App
 
   def run
     while keep_going
-      $stdout.clear_screen
+      # $stdout.clear_screen
       @menu.display_menu
       trigger_option if keep_going?
     end
@@ -32,7 +33,7 @@ class App
   end
 
   def trigger_option
-    $stdout.clear_screen
+    # $stdout.clear_screen
     call_method_from_class
   end
 
