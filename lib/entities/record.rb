@@ -22,6 +22,46 @@ class Record
     object
   end
 
+  def save
+    delete url
+
+    @created_at ||= fetch_current_date_time
+
+    @created_at = fetch_current_date_time
+
+    mode = 'a+'
+    write_headers = false
+
+    data = to_h # {owner:, url:, created_at:, :updated_at}
+    CSV.open base_path, mode, write_headers:, headers: data.keys do |csv|
+      csv << data.values
+    end
+  end
+
+  def delete(url)
+    Record.destroy url, base_path.to_s
+  end
+
+  def self.delete(url)
+    Record.destroy url, new.base_path.to_s
+  end
+
+  def self.destroy(url, path)
+    table = CSV.table path
+
+    table.delete_if do |row|
+      row[:url] == url
+    end
+
+    File.open path, 'w' do |file|
+      file.write table.to_csv
+    end
+  end
+
+  def fetch_current_date_time
+    DateTime.parse(DateTime.now.strftime('%FT%T%:z')).strftime('%d/%m/%y - %H:%M:% %P')
+  end
+
   # Método de classe para recuperar todos os registros de uma fonte de dados
   def self.all
     # Lê os dados da fonte de dados (por exemplo, um arquivo CSV)

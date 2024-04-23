@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 class Menu
   attr_reader :options
   def initialize
     @options = {
       0 => :exit,
-      1 => :list_repos
+      1 => :list_repos,
+      2 => :add_repo,
+      3 => :delete_repo,
+      4 => :fetch_repo
     }
   end
 
