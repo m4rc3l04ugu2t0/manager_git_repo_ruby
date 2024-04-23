@@ -23,6 +23,5 @@ class Repo < Record
 
   def base_path
     "#{File.dirname(__FILE__)}/../../config/database/repos.csv"
-
   end
 end

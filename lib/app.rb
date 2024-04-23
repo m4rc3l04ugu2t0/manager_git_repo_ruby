@@ -6,6 +6,8 @@ require_relative '../config/load_initializers'
 class App
   attr_accessor :keep_going
 
+  # self se refere a propria class, quando chama "App.call", ele criara uma nova
+  # instancia da class usando o metodo "new", seria como chama "App.new"
   def self.call
     new
   end
